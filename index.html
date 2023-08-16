@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sudoku Solver</title>
+    <link rel="stylesheet" href="sudoku.css">
+</head>
+<body>
+
+    <header>Sudoku Solver</header>
+
+    <div id="inputdiv"   style=" position:absolute;left:150px;top:10px ;display: block;">
+    <form id="form">
+        <!-- row 0 -->
+        <input type="text" id="c00" class="c00"    onkeypress="return onlyNumberKey(event)"
+        maxlength="1"  style=" position: absolute;top:110px;left:400px;" required>
+        <input type="text" id="c01" class="c01" onkeypress="return onlyNumberKey(event)"
+        maxlength="1" style=" position: absolute;top:110px;left:459px;" required>
+        <input type="text" id="c02" class="c02"   onkeypress="return onlyNumberKey(event)"
+        maxlength="1" style=" position: absolute;top:110px;left:517px;" required>
+        <input type="text" id="c03" class="c03"   onkeypress="return onlyNumberKey(event)"
+        maxlength="1" style=" position: absolute;top:110px;left:580px;" required>
+        <input type="text" id="c04" class="c04"  onkeypress="return onlyNumberKey(event)"
+        maxlength="1"  style=" position: absolute;top:110px;left:638px;" required>
+        <input type="text" id="c05" class="c05"   onkeypress="return onlyNumberKey(event)"
+        maxlength="1" style=" position: absolute;top:110px;left:697px;" required>
+        <input type="text" id="c06" class="c06"   onkeypress="return onlyNumberKey(event)"
+        maxlength="1" style=" position: absolute;top:110px;left:760px;" required>
+        <input type="text" id="c07" class="c07"  onkeypress="return onlyNumberKey(event)"
+        maxlength="1"  style=" position: absolute;top:110px;left:819px;" required>
+        <input type="text" id="c08" class="c08" onkeypress="return onlyNumberKey(event)"
+        maxlength="1"  style=" position: absolute;top:110px;left:877px;" required>
+
+
+         <!-- row 1 -->
+        <input type="text" id="c10" class="c10"   style=" position: absolute;top:166px;left:400px;" onkeypress="return onlyNumberKey(event)"
+        maxlength="1" required>
+        <input type="text" id="c11" class="c11"   style=" position: absolute;top:166px;left:459px;" onkeypress="return onlyNumberKey(event)"
+        maxlength="1" required>
+        <input type="text" id="c12" class="c12"   style=" position: absolute;top:166px;left:517px;" onkeypress="return onlyNumberKey(event)"
+        maxlength="1" required>
+        <input type="text" id="c13" class="c13"   style=" position: absolute;top:166px;left:580px;" onkeypress="return onlyNumberKey(event)"
+        maxlength="1" required>
+        <input type="text" id="c14" class="c14"   style=" position: absolute;top:166px;left:638px;" onkeypress="return onlyNumberKey(event)"
+        maxlength="1" required>
+        <input type="text" id="c15" class="c15"   style=" position: absolute;top:166px;left:697px;" onkeypress="return onlyNumberKey(event)"
+        maxlength="1" required>
+        <input type="text" id="c16" class="c16"   style=" position: absolute;top:166px;left:760px;" onkeypress="return onlyNumberKey(event)"
+        maxlength="1" required>
+        <input type="text" id="c17" class="c17"    style=" position: absolute;top:166px;left:819px;" onkeypress="return onlyNumberKey(event)"
+        maxlength="1" required>
+        <input type="text" id="c18" class="c18"   style=" position: absolute;top:166px;left:877px;" onkeypress="return onlyNumberKey(event)"
+        maxlength="1" required>
+
+        <!-- row 2 -->
+        <input type="text" id="c20" class="c20"   style=" position: absolute;top:222px;left:400px;" onkeypress="return onlyNumberKey(event)"
+        maxlength="2" required>
+        <input type="text" id="c21" class="c21"  style=" position: absolute;top:222px;left:459px;"  onkeypress="return onlyNumberKey(event)"
+        maxlength="1"required>
+        <input type="text" id="c22" class="c22"   style=" position: absolute;top:222px;left:517px;" onkeypress="return onlyNumberKey(event)"
+        maxlength="1" required>
+        <input type="text" id="c23" class="c23"  style=" position: absolute;top:222px;left:580px;"onkeypress="return onlyNumberKey(event)"
+        maxlength="1" required>
+        <input type="text" id="c24" class="c24"    style=" position: absolute;top:222px;left:638px;"onkeypress="return onlyNumberKey(event)"
+        maxlength="1"required>
+        <input type="text" id="c25" class="c25"   style=" position: absolute;top:222px;left:697px;"onkeypress="return onlyNumberKey(event)"
+        maxlength="1" required>
+        <input type="text" id="c26" class="c26"   style=" position: absolute;top:222px;left:760px;"onkeypress="return onlyNumberKey(event)"
+        maxlength="1" required>
+        <input type="text" id="c27" class="c27"   style=" position: absolute;top:222px;left:819px;"onkeypress="return onlyNumberKey(event)"
+        maxlength="1" required>
+        <input type="text" id="c28" class="c28"   style=" position: absolute;top:222px;left:877px;"onkeypress="return onlyNumberKey(event)"
+        maxlength="1"required>
+
+        <!-- row 3 -->
+        <input type="text" id="c30" class="c30"    style=" position: absolute;top:284px;left:400px;" onkeypress="return onlyNumberKey(event)"
+        maxlength="1"required>
+        <input type="text" id="c31" class="c31"  style=" position: absolute;top:284px;left:459px;"onkeypress="return onlyNumberKey(event)"
+        maxlength="1" required>
+        <input type="text" id="c32" class="c32"    style=" position: absolute;top:284px;left:517px;"onkeypress="return onlyNumberKey(event)"
+        maxlength="1" required>
+        <input type="text" id="c33" class="c33"   style=" position: absolute;top:284px;left:580px;" onkeypress="return onlyNumberKey(event)"
+        maxlength="1"required>
+        <input type="text" id="c34" class="c34"   style=" position: absolute;top:284px;left:638px;"onkeypress="return onlyNumberKey(event)"
+        maxlength="1" required>
+        <input type="text" id="c35" class="c35"   style=" position: absolute;top:284px;left:697px;" onkeypress="return onlyNumberKey(event)"
+        maxlength="1"required>
+        <input type="text" id="c36" class="c36"   style=" position: absolute;top:284px;left:760px;"onkeypress="return onlyNumberKey(event)"
+        maxlength="1"required>
+        <input type="text" id="c37" class="c37"   style=" position: absolute;top:284px;left:819px;"onkeypress="return onlyNumberKey(event)"
+        maxlength="1" required>
+        <input type="text" id="c38" class="c38"   style=" position: absolute;top:284px;left:877px;"  onkeypress="return onlyNumberKey(event)"
+        maxlength="1"required>
+
+        <!-- row 4 -->
+        <input type="text" id="c40" class="c40"   style=" position: absolute;top:340px;left:400px;"onkeypress="return onlyNumberKey(event)"
+        maxlength="1" required>
+        <input type="text" id="c41" class="c41"   style=" position: absolute;top:340px;left:459px;" onkeypress="return onlyNumberKey(event)"
+        maxlength="1"required>
+        <input type="text" id="c42" class="c42"   style=" position: absolute;top:340px;left:517px;" onkeypress="return onlyNumberKey(event)"
+        maxlength="1"required>
+        <input type="text" id="c43" class="c43"   style=" position: absolute;top:340px;left:580px;"onkeypress="return onlyNumberKey(event)"
+        maxlength="1" required>
+        <input type="text" id="c44" class="c44"   style=" position: absolute;top:340px;left:638px;" onkeypress="return onlyNumberKey(event)"
+        maxlength="1"required>
+        <input type="text" id="c45" class="c45"   style=" position: absolute;top:340px;left:697px;" onkeypress="return onlyNumberKey(event)"
+        maxlength="1"required>
+        <input type="text" id="c46" class="c46"   style=" position: absolute;top:340px;left:760px;" onkeypress="return onlyNumberKey(event)"
+        maxlength="1"required>
+        <input type="text" id="c47" class="c47"  style=" position: absolute;top:340px;left:819px;"onkeypress="return onlyNumberKey(event)"
+        maxlength="1" required>
+        <input type="text" id="c48" class="c48"   style=" position: absolute;top:340px;left:877px;" onkeypress="return onlyNumberKey(event)"
+        maxlength="1"required>
+
+        <!-- row 5 -->
+        <input type="text" id="c50" class="c50"   style=" position: absolute;top:396px;left:400px;"onkeypress="return onlyNumberKey(event)"
+        maxlength="1" required>
+        <input type="text" id="c51" class="c51"   style=" position: absolute;top:396px;left:459px;"onkeypress="return onlyNumberKey(event)"
+        maxlength="1" required>
+        <input type="text" id="c52" class="c52"   style=" position: absolute;top:396px;left:517px;" onkeypress="return onlyNumberKey(event)"
+        maxlength="1"required>
+        <input type="text" id="c53" class="c53"   style=" position: absolute;top:396px;left:580px;" onkeypress="return onlyNumberKey(event)"
+        maxlength="1" required>
+        <input type="text" id="c54" class="c54"   style=" position: absolute;top:396px;left:638px;" onkeypress="return onlyNumberKey(event)"
+        maxlength="1" required>
+        <input type="text" id="c55" class="c55"   style=" position: absolute;top:396px;left:697px;" onkeypress="return onlyNumberKey(event)"
+        maxlength="1" required>
+        <input type="text" id="c56" class="c56"   style=" position: absolute;top:396px;left:760px;" onkeypress="return onlyNumberKey(event)"
+        maxlength="1" required>
+        <input type="text" id="c57" class="c57"   style=" position: absolute;top:396px;left:819px;" onkeypress="return onlyNumberKey(event)"
+        maxlength="1"required>
+        <input type="text" id="c58" class="c58"   style=" position: absolute;top:396px;left:877px;"onkeypress="return onlyNumberKey(event)"
+        maxlength="1" required>
+
+        <!-- row 6 -->
+        <input type="text" id="c60" class="c60"   style=" position: absolute;top:458px;left:400px;"onkeypress="return onlyNumberKey(event)"
+        maxlength="1" required>
+        <input type="text" id="c61" class="c61"   style=" position: absolute;top:458px;left:459px;"onkeypress="return onlyNumberKey(event)"
+        maxlength="1" required>
+        <input type="text" id="c62" class="c62"   style=" position: absolute;top:458px;left:517px;" onkeypress="return onlyNumberKey(event)"
+        maxlength="1"required>
+        <input type="text" id="c63" class="c63"   style=" position: absolute;top:458px;left:580px;"onkeypress="return onlyNumberKey(event)"
+        maxlength="1"required>
+        <input type="text" id="c64" class="c64"   style=" position: absolute;top:458px;left:638px;" onkeypress="return onlyNumberKey(event)"
+        maxlength="1"required>
+        <input type="text" id="c65" class="c65"   style=" position: absolute;top:458px;left:697px;"onkeypress="return onlyNumberKey(event)"
+        maxlength="1" required>
+        <input type="text" id="c66" class="c66"   style=" position: absolute;top:458px;left:760px;"onkeypress="return onlyNumberKey(event)"
+        maxlength="1"required>
+        <input type="text" id="c67" class="c67"    style=" position: absolute;top:458px;left:819px;"onkeypress="return onlyNumberKey(event)"
+        maxlength="1" required>
+        <input type="text" id="c68" class="c68"   style=" position: absolute;top:458px;left:877px;"onkeypress="return onlyNumberKey(event)"
+        maxlength="1" required>
+
+
+        <!-- row 7 -->
+        <input type="text" id="c70" class="c70"   style=" position: absolute;top:515px;left:400px;" onkeypress="return onlyNumberKey(event)"
+        maxlength="1" required>
+        <input type="text" id="c71" class="c71"   style=" position: absolute;top:515px;left:459px;" onkeypress="return onlyNumberKey(event)"
+        maxlength="1" required>
+        <input type="text" id="c72" class="c72"   style=" position: absolute;top:515px;left:517px;"  onkeypress="return onlyNumberKey(event)"
+        maxlength="1"required>
+        <input type="text" id="c73" class="c73"   style=" position: absolute;top:515px;left:580px;" onkeypress="return onlyNumberKey(event)"
+        maxlength="1" required>
+        <input type="text" id="c74" class="c74"   style=" position: absolute;top:515px;left:638px;" onkeypress="return onlyNumberKey(event)"
+        maxlength="1" required>
+        <input type="text" id="c75" class="c75"   style=" position: absolute;top:515px;left:697px;" onkeypress="return onlyNumberKey(event)"
+        maxlength="1" required>
+        <input type="text" id="c76" class="c76"   style=" position: absolute;top:515px;left:760px;" onkeypress="return onlyNumberKey(event)"
+        maxlength="1" required>
+        <input type="text" id="c77" class="c77"   style=" position: absolute;top:515px;left:819px;" onkeypress="return onlyNumberKey(event)"
+        maxlength="1" required>
+        <input type="text" id="c78" class="c78"   style=" position: absolute;top:515px;left:877px;" onkeypress="return onlyNumberKey(event)"
+        maxlength="1" required>
+
+        <!-- row 8 -->
+        <input type="text" id="c80" class="c80"  style=" position: absolute;top:572px;left:400px;" onkeypress="return onlyNumberKey(event)"
+        maxlength="1" required>
+        <input type="text" id="c81" class="c81"  style=" position: absolute;top:572px;left:459px;" onkeypress="return onlyNumberKey(event)"
+        maxlength="1" required>
+        <input type="text" id="c82" class="c82"  style=" position: absolute;top:572px;left:517px;"onkeypress="return onlyNumberKey(event)"
+        maxlength="1" required>
+        <input type="text" id="c83" class="c83"  style=" position: absolute;top:572px;left:580px;"onkeypress="return onlyNumberKey(event)"
+        maxlength="1" required>
+        <input type="text" id="c84" class="c84" style=" position: absolute;top:572px;left:638px;"onkeypress="return onlyNumberKey(event)"
+        maxlength="1" required>
+        <input type="text" id="c85" class="c85"  style=" position: absolute;top:572px;left:697px;"onkeypress="return onlyNumberKey(event)"
+        maxlength="1" required>
+        <input type="text" id="c86" class="c86"  style=" position: absolute;top:572px;left:760px;"onkeypress="return onlyNumberKey(event)"
+        maxlength="1" required>
+        <input type="text" id="c87" class="c87"  style=" position: absolute;top:572px;left:819px;"onkeypress="return onlyNumberKey(event)"
+        maxlength="1" required>
+        <input type="text" id="c88" class="c88"  style=" position: absolute;top:572px;left:877px;"onkeypress="return onlyNumberKey(event)"
+        maxlength="1" required>
+
+        </form>
+      
+    </div>
+
+
+<div style="position:absolute;left:130px ;top:5px;">
+
+    <div id="nosolution" style="display:none;"> 
+
+        <span>solution not exists</span>
+
+    </div>
+        <button type="submit" onclick="onsubmit1()" id="submit"  style=" position: absolute;top:650px;left:550px;">Solve</button>
+        
+        <button type="reset" onclick="resetf()"   style=" position: absolute;top:650px;left:700px;">Reset</button>
+        
+</div>
+
+
+
+
+        
+
+        
+
+        
+
+        
+    <!-- output sudoku -->
+        
+
+
+
+
+
+    <div id="outputdiv" style=" position:absolute;left:150px;top:10px;display:none;" >
+        <!-- row 0 -->
+        <span  id="out00"  style=" position:absolute;top:110px;left:400px;"></span>
+        <span  id="out01"  style=" position: absolute;top:110px;left:459px;"></span>
+        <span id="out02"   style=" position: absolute;top:110px;left:517px;"></span>
+        <span id="out03"   style=" position: absolute;top:110px;left:580px;"></span>
+        <span id="out04"   style=" position: absolute;top:110px;left:638px;"></span>
+        <span id="out05"   style=" position: absolute;top:110px;left:697px;"></span>
+        <span id="out06"   style=" position: absolute;top:110px;left:760px;"></span>
+        <span id="out07"   style=" position: absolute;top:110px;left:819px;"></span>
+        <span id="out08"   style=" position: absolute;top:110px;left:877px;"></span>
+
+
+        <!-- row 1 -->
+        <span  id="out10"  style=" position:absolute;top:166px;left:400px;"></span>
+        <span  id="out11"  style=" position: absolute;top:166px;left:459px;"></span>
+        <span id="out12"   style=" position: absolute;top:166px;left:517px;"></span>
+        <span id="out13"   style=" position: absolute;top:166px;left:580px;"></span>
+        <span id="out14"   style=" position: absolute;top:166px;left:638px;"></span>
+        <span id="out15"   style=" position: absolute;top:166px;left:697px;"></span>
+        <span id="out16"   style=" position: absolute;top:166px;left:760px;"></span>
+        <span id="out17"   style=" position: absolute;top:166px;left:819px;"></span>
+        <span id="out18"   style=" position: absolute;top:166px;left:877px;"></span>
+
+        <!-- row 2 -->
+        <span  id="out20"  style=" position:absolute;top:222px;left:400px;"></span>
+        <span  id="out21"  style=" position: absolute;top:222px;left:459px;"></span>
+        <span id="out22"   style=" position: absolute;top:222px;left:517px;"></span>
+        <span id="out23"   style=" position: absolute;top:222px;left:580px;"></span>
+        <span id="out24"   style=" position: absolute;top:222px;left:638px;"></span>
+        <span id="out25"   style=" position: absolute;top:222px;left:697px;"></span>
+        <span id="out26"   style=" position: absolute;top:222px;left:760px;"></span>
+        <span id="out27"   style=" position: absolute;top:222px;left:819px;"></span>
+        <span id="out28"   style=" position: absolute;top:222px;left:877px;"></span>
+
+        <!-- row 3 -->
+        <span  id="out30"  style=" position:absolute;top:284px;left:400px;"></span>
+        <span  id="out31"  style=" position: absolute;top:284px;left:459px;"></span>
+        <span id="out32"   style=" position: absolute;top:284px;left:517px;"></span>
+        <span id="out33"   style=" position: absolute;top:284px;left:580px;"></span>
+        <span id="out34"   style=" position: absolute;top:284px;left:638px;"></span>
+        <span id="out35"   style=" position: absolute;top:284px;left:697px;"></span>
+        <span id="out36"   style=" position: absolute;top:284px;left:760px;"></span>
+        <span id="out37"   style=" position: absolute;top:284px;left:819px;"></span>
+        <span id="out38"   style=" position: absolute;top:284px;left:877px;"></span>
+
+        <!-- row 4 -->
+        <span  id="out40"  style=" position:absolute;top:340px;left:400px;"></span>
+        <span  id="out41"  style=" position: absolute;top:340px;left:459px;"></span>
+        <span id="out42"   style=" position: absolute;top:340px;left:517px;"></span>
+        <span id="out43"   style=" position: absolute;top:340px;left:580px;"></span>
+        <span id="out44"   style=" position: absolute;top:340px;left:638px;"></span>
+        <span id="out45"   style=" position: absolute;top:340px;left:697px;"></span>
+        <span id="out46"   style=" position: absolute;top:340px;left:760px;"></span>
+        <span id="out47"   style=" position: absolute;top:340px;left:819px;"></span>
+        <span id="out48"   style=" position: absolute;top:340px;left:877px;"></span>
+
+        <!-- row 5 -->
+        <span  id="out50"  style=" position:absolute;top:396px;left:400px;"></span>
+        <span  id="out51"  style=" position: absolute;top:396px;left:459px;"></span>
+        <span id="out52"   style=" position: absolute;top:396px;left:517px;"></span>
+        <span id="out53"   style=" position: absolute;top:396px;left:580px;"></span>
+        <span id="out54"   style=" position: absolute;top:396px;left:638px;"></span>
+        <span id="out55"   style=" position: absolute;top:396px;left:697px;"></span>
+        <span id="out56"   style=" position: absolute;top:396px;left:760px;"></span>
+        <span id="out57"   style=" position: absolute;top:396px;left:819px;"></span>
+        <span id="out58"   style=" position: absolute;top:396px;left:877px;"></span>
+
+
+        <!-- row 6 -->
+        <span  id="out60"  style=" position:absolute;top:458px;left:400px;"></span>
+        <span  id="out61"  style=" position: absolute;top:458px;left:459px;"></span>
+        <span id="out62"   style=" position: absolute;top:458px;left:517px;"></span>
+        <span id="out63"   style=" position: absolute;top:458px;left:580px;"></span>
+        <span id="out64"   style=" position: absolute;top:458px;left:638px;"></span>
+        <span id="out65"   style=" position: absolute;top:458px;left:697px;"></span>
+        <span id="out66"   style=" position: absolute;top:458px;left:760px;"></span>
+        <span id="out67"   style=" position: absolute;top:458px;left:819px;"></span>
+        <span id="out68"   style=" position: absolute;top:458px;left:877px;"></span>
+
+
+        <!-- row 7 -->
+        <span  id="out70"  style=" position:absolute;top:515px;left:400px;"></span>
+        <span  id="out71"  style=" position: absolute;top:515px;left:459px;"></span>
+        <span id="out72"   style=" position: absolute;top:515px;left:517px;"></span>
+        <span id="out73"   style=" position: absolute;top:515px;left:580px;"></span>
+        <span id="out74"   style=" position: absolute;top:515px;left:638px;"></span>
+        <span id="out75"   style=" position: absolute;top:515px;left:697px;"></span>
+        <span id="out76"   style=" position: absolute;top:515px;left:760px;"></span>
+        <span id="out77"   style=" position: absolute;top:515px;left:819px;"></span>
+        <span id="out78"   style=" position: absolute;top:515px;left:877px;"></span>
+
+
+        <!-- row 8 -->
+        <span  id="out80"  style=" position:absolute;top:578px;left:400px;"></span>
+        <span  id="out81"  style=" position: absolute;top:578px;left:459px;"></span>
+        <span id="out82"   style=" position: absolute;top:578px;left:517px;"></span>
+        <span id="out83"   style=" position: absolute;top:578px;left:580px;"></span>
+        <span id="out84"   style=" position: absolute;top:578px;left:638px;"></span>
+        <span id="out85"   style=" position: absolute;top:578px;left:697px;"></span>
+        <span id="out86"   style=" position: absolute;top:578px;left:760px;"></span>
+        <span id="out87"   style=" position: absolute;top:578px;left:819px;"></span>
+        <span id="out88"   style=" position: absolute;top:578px;left:877px;"></span>
+
+        
+    </div>
+    
+    <footer>
+
+        <h2>CREATED BY : NISHANT.D.K</h2>
+
+    <footer>
+</body>
+
+
+<script>
+    function onlyNumberKey(evt) {
+         
+        // Only ASCII character in that range allowed
+        var ASCIICode = (evt.which) ? evt.which : evt.keyCode
+        if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
+            return false;
+        return true;
+    }
+</script>
+<script>
+// reset button
+function resetf(){
+var out = document.getElementById("outputdiv");
+var ini =document.getElementById("inputdiv");
+
+
+
+if (ini.style.display === "none") {
+    ini.style.display = "block";
+  }
+
+if (out.style.display === "block") {
+    out.style.display = "none";
+  }  
+  document.getElementById("form").reset();
+}
+
+</script>
+
+<script>
+
+// solve button
+
+function onsubmit1()
+{
+
+// Javascript program for above approach
+ 
+// N is the size of the 2D matrix   N*N
+let N = 9;
+ 
+ /* Takes a partially filled-in grid and attempts
+     to assign values to all unassigned locations in
+     such a way to meet the requirements for
+     Sudoku solution (non-duplication across rows,
+     columns, and boxes) */
+
+ // Check whether it will be legal
+ // to assign num to the
+ // given row, col
+ function isSafe(grid, row, col, num)
+ {
+      
+     // Check if we find the same num
+     // in the similar row , we
+     // return false
+     for(let x = 0; x <= 8; x++)
+         if (grid[row][x] == num)
+             return false;
+  
+     // Check if we find the same num
+     // in the similar column ,
+     // we return false
+     for(let x = 0; x <= 8; x++)
+         if (grid[x][col] == num)
+             return false;
+  
+     // Check if we find the same num
+     // in the particular 3*3
+     // matrix, we return false
+     let startRow = row - row % 3,
+         startCol = col - col % 3;
+          
+     for(let i = 0; i < 3; i++)
+         for(let j = 0; j < 3; j++)
+             if (grid[i + startRow][j + startCol] == num)
+                 return false;
+  
+     return true;
+ }
+
+
+
+
+ function solveSudoku(grid, row, col)
+ {
+      
+     /* If we have reached the 8th
+        row and 9th column (0
+        indexed matrix) ,
+        we are returning true to avoid further
+        backtracking       */
+     if (row == N - 1 && col == N)
+         return true;
+  
+     // Check if column value  becomes 9 ,
+     // we move to next row
+     // and column start from 0
+     if (col == N)
+     {
+         row++;
+         col = 0;
+     }
+  
+     // Check if the current position
+     // of the grid already
+     // contains value >0, we iterate
+     // for next column
+     if (grid[row][col] != 0)
+         return solveSudoku(grid, row, col + 1);
+  
+     for(let num = 1; num < 10; num++)
+     {
+          
+         // Check if it is safe to place
+         // the num (1-9)  in the given
+         // row ,col ->we move to next column
+         if (isSafe(grid, row, col, num))
+         {
+              
+             /*  assigning the num in the current
+             (row,col)  position of the grid and
+             assuming our assigned num in the position
+             is correct */
+             grid[row][col] = num;
+  
+             // Checking for next
+             // possibility with next column
+             if (solveSudoku(grid, row, col + 1))
+                 return true;
+         }
+          
+         /* removing the assigned num , since our
+            assumption was wrong , and we go for next
+            assumption with diff num value   */
+         grid[row][col] = 0;
+     }
+     return false;
+ }
+  
+
+  
+
+
+ 
+
+//  row 0
+ var c00 = document.getElementById("c00").value;
+ var c01 = document.getElementById("c01").value;
+ var c02 = document.getElementById("c02").value;
+ var c03 = document.getElementById("c03").value;
+ var c04 = document.getElementById("c04").value;
+ var c05 = document.getElementById("c05").value;
+ var c06 = document.getElementById("c06").value;
+ var c07 = document.getElementById("c07").value;
+ var c08 = document.getElementById("c08").value;
+
+//  row 1
+var c10 = document.getElementById("c10").value;
+ var c11 = document.getElementById("c11").value;
+ var c12 = document.getElementById("c12").value;
+ var c13 = document.getElementById("c13").value;
+ var c14 = document.getElementById("c14").value;
+ var c15 = document.getElementById("c15").value;
+ var c16 = document.getElementById("c16").value;
+ var c17 = document.getElementById("c17").value;
+ var c18 = document.getElementById("c18").value;
+
+ //  row 2
+ var c20 = document.getElementById("c20").value;
+ var c21 = document.getElementById("c21").value;
+ var c22 = document.getElementById("c22").value;
+ var c23 = document.getElementById("c23").value;
+ var c24 = document.getElementById("c24").value;
+ var c25 = document.getElementById("c25").value;
+ var c26 = document.getElementById("c26").value;
+ var c27 = document.getElementById("c27").value;
+ var c28 = document.getElementById("c28").value;
+
+ //  row 3
+ var c30 = document.getElementById("c30").value;
+ var c31 = document.getElementById("c31").value;
+ var c32 = document.getElementById("c32").value;
+ var c33 = document.getElementById("c33").value;
+ var c34 = document.getElementById("c34").value;
+ var c35 = document.getElementById("c35").value;
+ var c36 = document.getElementById("c36").value;
+ var c37 = document.getElementById("c37").value;
+ var c38 = document.getElementById("c38").value;
+
+ //  row 4
+ var c40 = document.getElementById("c40").value;
+ var c41 = document.getElementById("c41").value;
+ var c42 = document.getElementById("c42").value;
+ var c43 = document.getElementById("c43").value;
+ var c44 = document.getElementById("c44").value;
+ var c45 = document.getElementById("c45").value;
+ var c46 = document.getElementById("c46").value;
+ var c47 = document.getElementById("c47").value;
+ var c48 = document.getElementById("c48").value;
+
+ //  row 5
+ var c50 = document.getElementById("c50").value;
+ var c51 = document.getElementById("c51").value;
+ var c52 = document.getElementById("c52").value;
+ var c53 = document.getElementById("c53").value;
+ var c54 = document.getElementById("c54").value;
+ var c55 = document.getElementById("c55").value;
+ var c56 = document.getElementById("c56").value;
+ var c57 = document.getElementById("c57").value;
+ var c58 = document.getElementById("c58").value;
+
+ //  row 6
+ var c60 = document.getElementById("c60").value;
+ var c61 = document.getElementById("c61").value;
+ var c62 = document.getElementById("c62").value;
+ var c63 = document.getElementById("c63").value;
+ var c64 = document.getElementById("c64").value;
+ var c65 = document.getElementById("c65").value;
+ var c66 = document.getElementById("c66").value;
+ var c67 = document.getElementById("c67").value;
+ var c68 = document.getElementById("c68").value;
+
+ //  row 7
+ var c70 = document.getElementById("c70").value;
+ var c71 = document.getElementById("c71").value;
+ var c72 = document.getElementById("c72").value;
+ var c73 = document.getElementById("c73").value;
+ var c74 = document.getElementById("c74").value;
+ var c75 = document.getElementById("c75").value;
+ var c76 = document.getElementById("c76").value;
+ var c77 = document.getElementById("c77").value;
+ var c78 = document.getElementById("c78").value;
+ 
+ //  row 8
+ var c80 = document.getElementById("c80").value;
+ var c81 = document.getElementById("c81").value;
+ var c82 = document.getElementById("c82").value;
+ var c83 = document.getElementById("c83").value;
+ var c84 = document.getElementById("c84").value;
+ var c85 = document.getElementById("c85").value;
+ var c86 = document.getElementById("c86").value;
+ var c87 = document.getElementById("c87").value;
+ var c88 = document.getElementById("c88").value;
+
+
+ // Driver Code
+ let grid = [ [c00 ,c01, c02, c03, c04, c05, c06, c07, c08 ],
+              [c10 ,c11, c12, c13, c14, c15, c16, c17, c18 ],
+              [c20 ,c21, c22, c23, c24, c25, c26, c27, c28 ],
+              [c30 ,c31, c32, c33, c34, c35, c36, c37, c38 ],
+              [c40 ,c41, c42, c43, c44, c45, c46, c47, c48 ],
+              [c50 ,c51, c52, c53, c54, c55, c56, c57, c58 ],
+              [c60 ,c61, c62, c63, c64, c65, c66, c67, c68 ],
+              [c70 ,c71, c72, c73, c74, c75, c76, c77, c78 ],
+              [c80 ,c81, c82, c83, c84, c85, c86, c87, c88 ],
+
+     ]
+
+
+
+var out = document.getElementById("outputdiv");
+var ini =document.getElementById("inputdiv");
+
+if (ini.style.display === "block") {
+    ini.style.display = "none";
+  }
+
+if (out.style.display === "none") {
+    out.style.display = "block";
+  }  
+    
+   
+ if (solveSudoku(grid, 0, 0))
+{
+ for(let i = 0; i < N; i++)
+     {
+         for(let j = 0; j < N; j++)
+
+         document.getElementById("out"+i+j).innerHTML = grid[i][j];   
+        
+        }
+
+
+    }
+
+
+ else
+ {
+    var no = document.getElementById("nosolution");
+    if (no.style.display === "none") {
+    no.style.display = "block";
+  }
+
+
+ }
+
+}
+</script>
+</html>
